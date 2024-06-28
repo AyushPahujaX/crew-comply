@@ -5,3 +5,10 @@ export const users = pgTable("users", {
   name: varchar("name", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }).notNull(),
 });
+
+
+export interface User {
+    id: number,
+    name: string,
+    email: string,
+}
