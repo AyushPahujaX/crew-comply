@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { Effect, Either } from "effect";
-import { getUsers } from "./services";
+import { addUser, getUsers } from "./services";
 
 
 const app = new Hono();
@@ -35,6 +35,16 @@ app.onError((err, c) => {
 
 app.get("/users", async (c) => {
   return await getUsers();
+});
+
+app.post("/users",async(c)=> {
+    try{
+        const user = await c.req.json();
+        const response = await addUser(user);
+        return response;
+    }catch(err){
+        return new Response("Error adding user", {status:500})
+    }
 });
 
 const port = 3000;
