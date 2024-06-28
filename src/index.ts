@@ -1,11 +1,11 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { Effect, Either } from "effect";
+import { getUsers } from "./services";
 
-// Create Hono app
+
 const app = new Hono();
 
-// Define a handler with effect-ts
 const handleRequest = (path: string): Effect.Effect<Response, unknown, never> =>
   Either.try(() => {
     if (path === "/hello") {
@@ -15,25 +15,28 @@ const handleRequest = (path: string): Effect.Effect<Response, unknown, never> =>
     }
   });
 
-// Define a route
+
 app.get("/hello", async (c) => {
   const effect = handleRequest(c.req.path);
   const response = Effect.runSync(effect);
   return response;
 });
 
-// Not Found handler
+
 app.notFound((c) => {
   return c.text("Custom 404 Message", 404);
 });
 
-// Error Handling
+
 app.onError((err, c) => {
   console.error(`${err}`);
   return c.text("Custom Error Message", 500);
 });
 
-// Start the server
+app.get("/users", async (c) => {
+  return await getUsers();
+});
+
 const port = 3000;
 console.log(`Server is running on port ${port}`);
 serve({
@@ -41,5 +44,5 @@ serve({
   port,
 });
 
-// For Cloudflare Workers
+
 export default app;
