@@ -8,13 +8,21 @@
   "dependencies": {
     "@hono/node-server": "^1.11.4",
     "@neondatabase/serverless": "^0.9.4",
+    "@workos-inc/node": "^7.11.3",
+    "cookie": "^0.6.0",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.2",
     "effect": "^3.4.5",
     "hono": "^4.4.9",
+    "hono-sessions": "^0.5.8",
+    "iron-session": "^8.0.2",
+    "jose": "^5.6.2",
     "postgres": "^3.4.4"
   },
   "devDependencies": {
+    "@types/cookie": "^0.6.0",
+    "@types/cookie-parser": "^1.4.7",
     "@types/node": "^20.11.17",
     "drizzle-kit": "^0.22.7",
     "tsx": "^4.7.1"

@@ -9,6 +9,8 @@ const db = postgres(database);
 
 const data = drizzle(db, { logger:true})
 
+
+
 export const getUsers = async () => {
   try {
     const allUsers = await data.select().from(users);
