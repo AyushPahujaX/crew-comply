@@ -33,6 +33,7 @@ app.use("*",sessionMiddleware({
 app.get("/", isAuthenticated, (c) => {
   const session = c.get("session");
   const user = session.get("user");
+  console.log(user);
   return c.json({ message: `Welcome ${user}` });
 });
 
